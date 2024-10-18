@@ -41,14 +41,6 @@ def do_get_ip_ranges(self, auth_credentials, cert):
     netbox_url = self.inputs["endpoint"]["endpointProperties"]["hostName"]
     netbox_site = self.inputs["endpoint"]["endpointProperties"]["netboxSite"]
 
-    try:
-        if "domain" in self.inputs["endpoint"]["endpointProperties"]:
-            domain = self.inputs["endpoint"]["endpointProperties"]["domain"]
-        else:
-            logging.info(f"Domain variable not set. Ignorning.")
-    except Exception as e:
-        raise e
-
     username = auth_credentials["privateKeyId"]
     token = auth_credentials["privateKey"]
 
@@ -77,7 +69,6 @@ def do_get_ip_ranges(self, auth_credentials, cert):
                 "gatewayAddress": str(subnet[1]),
             }
 
-            result_ranges.append(network_range)
     else:
         for ip_range in r:
             subnet = (ipaddress.ip_interface(str(ip_range['start_address']))).network
@@ -97,7 +88,16 @@ def do_get_ip_ranges(self, auth_credentials, cert):
                 "gatewayAddress": str(subnet[1]),
             }
 
-            result_ranges.append(network_range)
+    try:
+        if "domain" in self.inputs["endpoint"]["endpointProperties"]:
+            network_range["domain"] = self.inputs["endpoint"]["endpointProperties"]["domain"]
+        else:
+            logging.info(f"Domain variable not set. Ignorning.")
+    except Exception as e:
+        raise e
+
+
+    result_ranges.append(network_range)
 
     result = {
         "ipRanges": result_ranges

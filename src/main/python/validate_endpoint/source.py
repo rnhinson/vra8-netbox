@@ -25,12 +25,16 @@ def handler(context, inputs):
 
 def do_validate_endpoint(self, auth_credentials, cert):
 
-    ignore_ssl = self.inputs["endpoint"]["endpointProperties"]["ignore_ssl"]
-    if ignore_ssl == "true":
-        urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
-        verify = False
-    else:
-        verify = True
+    try:
+        ignore_ssl = str(self.inputs["endpoint"]["endpointProperties"]["ignore_ssl"])
+        if ignore_ssl == "true":
+            urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
+            verify = False
+        else:
+            verify = True
+    except Exception as e:
+        raise e
+
     netbox_url = self.inputs["endpoint"]["endpointProperties"]["netbox_url"]
     username = auth_credentials["privateKeyId"] # not needed for NetBox, but required for vRA IPAM plugin
     token = auth_credentials["privateKey"]

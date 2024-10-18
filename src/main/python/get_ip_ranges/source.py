@@ -26,12 +26,16 @@ def handler(context, inputs):
 
 def do_get_ip_ranges(self, auth_credentials, cert):
 
-    ignore_ssl = self.inputs["endpoint"]["endpointProperties"]["ignore_ssl"]
-    if ignore_ssl == "true":
-        urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
-        verify = False
-    else:
-        verify = True
+    try:
+        ignore_ssl = str(self.inputs["endpoint"]["endpointProperties"]["ignore_ssl"])
+        if ignore_ssl == "true":
+            urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
+            verify = False
+        else:
+            verify = True
+    except Exception as e:
+        raise e
+
     netbox_object = self.inputs["endpoint"]["endpointProperties"]["netboxObject"]
     netbox_tag = self.inputs["endpoint"]["endpointProperties"]["netboxTag"]
     netbox_url = self.inputs["endpoint"]["endpointProperties"]["hostName"]

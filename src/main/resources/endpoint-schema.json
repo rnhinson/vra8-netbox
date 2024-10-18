@@ -114,7 +114,7 @@
       },
       "label": "Ignore SSL",
       "constraints": {
-        "required": true
+        "required": false
       }
     },
     "domain": {

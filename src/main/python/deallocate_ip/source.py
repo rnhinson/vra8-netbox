@@ -39,7 +39,7 @@ def do_deallocate_ip(self, auth_credentials, cert):
 def deallocate(resource, endpoint, deallocation, auth_credentials, netbox_url, token):
 
     try:
-        ignore_ssl = str(self.inputs["endpoint"]["endpointProperties"]["ignore_ssl"])
+        ignore_ssl = str(endpoint["endpointProperties"]["ignore_ssl"])
         if ignore_ssl == "true":
             urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
             verify = False

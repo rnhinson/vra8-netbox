@@ -42,12 +42,14 @@ def do_get_ip_ranges(self, auth_credentials, cert):
     netbox_site = self.inputs["endpoint"]["endpointProperties"]["netboxSite"]
 
     try:
-        if self.inputs["endpoint"]["endpointProperties"]["domain"] != None:
+        if "domain" in self.inputs["endpoint"]["endpointProperties"]:
             domain = self.inputs["endpoint"]["endpointProperties"]["domain"]
         else:
             logging.info(f"Domain variable not set. Ignorning.")
+    except Exception as e:
+        raise e
 
-    username = auth_credentials["privateKeyId"] # not needed for NetBox, but required for vRA IPAM plugin
+    username = auth_credentials["privateKeyId"]
     token = auth_credentials["privateKey"]
 
     logging.info("Collecting ranges")
@@ -74,8 +76,6 @@ def do_get_ip_ranges(self, auth_credentials, cert):
 
                 "gatewayAddress": str(subnet[1]),
             }
-            if domain != None:
-                network_range["domain"] = str(domain)
 
             result_ranges.append(network_range)
     else:
@@ -96,8 +96,6 @@ def do_get_ip_ranges(self, auth_credentials, cert):
 
                 "gatewayAddress": str(subnet[1]),
             }
-            if domain != None:
-                network_range["domain"] = str(domain)
 
             result_ranges.append(network_range)
 

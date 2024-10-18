@@ -41,8 +41,11 @@ def do_get_ip_ranges(self, auth_credentials, cert):
     netbox_url = self.inputs["endpoint"]["endpointProperties"]["hostName"]
     netbox_site = self.inputs["endpoint"]["endpointProperties"]["netboxSite"]
 
-    if domain != None:
-        domain = self.inputs["endpoint"]["endpointProperties"]["domain"]
+    try:
+        if self.inputs["endpoint"]["endpointProperties"]["domain"] != None:
+            domain = self.inputs["endpoint"]["endpointProperties"]["domain"]
+        else:
+            logging.info(f"Domain variable not set. Ignorning.")
 
     username = auth_credentials["privateKeyId"] # not needed for NetBox, but required for vRA IPAM plugin
     token = auth_credentials["privateKey"]

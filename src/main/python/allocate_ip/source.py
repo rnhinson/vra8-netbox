@@ -66,12 +66,15 @@ def allocate(resource, auth_credentials, allocation, context, endpoint):
 
 def allocate_in_range(range_id, auth_credentials, resource, allocation, context, endpoint):
 
-    ignore_ssl = endpoint["endpointProperties"]["ignore_ssl"]
-    if ignore_ssl == "true":
-      urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
-      verify = False
-    else:
-      verify = True
+    try:
+        ignore_ssl = str(self.inputs["endpoint"]["endpointProperties"]["ignore_ssl"])
+        if ignore_ssl == "true":
+            urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
+            verify = False
+        else:
+            verify = True
+    except Exception as e:
+        raise e
 
     token = auth_credentials["privateKey"]
     netbox_url = endpoint["endpointProperties"]["hostName"]

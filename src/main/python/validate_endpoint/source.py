@@ -12,6 +12,7 @@ conditions of the subcomponent's license, as noted in the LICENSE file.
 """
 
 import requests
+from requests.packages import urllib3
 from vra_ipam_utils.ipam import IPAM
 from vra_ipam_utils.exceptions import InvalidCertificateException
 import logging
@@ -26,7 +27,7 @@ def handler(context, inputs):
 def do_validate_endpoint(self, auth_credentials, cert):
 
     try:
-        ignore_ssl = str(self.inputs["endpoint"]["endpointProperties"]["ignore_ssl"])
+        ignore_ssl = self.inputs["endpointProperties"]["ignore_ssl"]
         if ignore_ssl == "true":
             urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
             verify = False
@@ -35,7 +36,7 @@ def do_validate_endpoint(self, auth_credentials, cert):
     except Exception as e:
         raise e
 
-    netbox_url = self.inputs["endpoint"]["endpointProperties"]["netbox_url"]
+    netbox_url = self.inputs["endpointProperties"]["hostName"]
     username = auth_credentials["privateKeyId"] # not needed for NetBox, but required for vRA IPAM plugin
     token = auth_credentials["privateKey"]
 

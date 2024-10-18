@@ -1,0 +1,118 @@
+{
+  "layout": {
+    "pages": [
+      {
+        "id": "NetBox IPAM",
+        "title": "NetBox IPAM endpoint",
+        "sections": [
+          {
+            "id": "section_1",
+            "fields": [
+              {
+                "id": "privateKeyId",
+                "display": "textField"
+              },
+              {
+                "id": "privateKey",
+                "display": "passwordField"
+              },
+              {
+                "id": "hostName",
+                "display": "textField"
+              },
+              {
+                "id": "netboxTag",
+                "display": "textField"
+              },
+              {
+                "id": "netboxObject",
+                "display": "dropDown"
+              },
+              {
+                "id": "netboxSite",
+                "display": "textField"
+              },
+              {
+                "id": "ignore_ssl",
+                "display": "checkbox"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "schema": {
+    "privateKeyId": {
+      "type": {
+        "dataType": "string"
+      },
+      "label": "Username",
+      "constraints": {
+        "required": true
+      }
+    },
+    "privateKey": {
+      "label": "Password",
+      "type": {
+        "dataType": "secureString"
+      },
+      "constraints": {
+        "required": true
+      }
+    },
+    "hostName": {
+      "type": {
+        "dataType": "string"
+      },
+      "label": "Netbox URL",
+      "constraints": {
+        "required": true
+      }
+    },
+    "netboxTag": {
+      "type": {
+        "dataType": "string"
+      },
+      "label": "Netbox Tag",
+      "constraints": {
+        "required": true
+      }
+    },
+    "netboxObject": {
+      "type": {
+        "dataType": "string"
+      },
+      "label": "Netbox Object",
+      "valueList": [{
+           "label": "prefixes",
+           "value": "prefixes"
+      }, {
+           "label": "ip-ranges",
+           "value": "ip-ranges"
+      }],
+      "constraints": {
+        "required": true
+      }
+    },
+    "netboxSite": {
+      "type": {
+        "dataType": "string"
+      },
+      "label": "Netbox Site",
+      "constraints": {
+        "required": true
+      }
+    },
+    "ignore_ssl": {
+      "type": {
+        "dataType": "integer"
+      },
+      "label": "Ignore SSL",
+      "constraints": {
+        "required": true
+      }
+    }
+  },
+  "options": {}
+}

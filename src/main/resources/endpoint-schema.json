@@ -35,6 +35,10 @@
               {
                 "id": "ignore_ssl",
                 "display": "checkbox"
+              },
+              {
+                "id": "domain",
+                "display": "textField"
               }
             ]
           }
@@ -65,7 +69,7 @@
       "type": {
         "dataType": "string"
       },
-      "label": "Netbox URL",
+      "label": "NetBox URL",
       "constraints": {
         "required": true
       }
@@ -74,7 +78,7 @@
       "type": {
         "dataType": "string"
       },
-      "label": "Netbox Tag",
+      "label": "NetBox Tag",
       "constraints": {
         "required": true
       }
@@ -83,7 +87,7 @@
       "type": {
         "dataType": "string"
       },
-      "label": "Netbox Object",
+      "label": "NetBox Object",
       "valueList": [{
            "label": "prefixes",
            "value": "prefixes"
@@ -99,7 +103,7 @@
       "type": {
         "dataType": "string"
       },
-      "label": "Netbox Site",
+      "label": "NetBox Site",
       "constraints": {
         "required": true
       }
@@ -111,6 +115,15 @@
       "label": "Ignore SSL",
       "constraints": {
         "required": true
+      }
+    },
+    "dns_zone": {
+      "type": {
+        "dataType": "string"
+      },
+      "label": "Domain",
+      "constraints": {
+        "required": false
       }
     }
   },

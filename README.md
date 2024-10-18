@@ -65,6 +65,12 @@ Building the package for the first time should include the `-PcollectDependencie
     - Disables the `urllib3.exceptions.InsecureRequestWarning`
         - (but seriously, it's 2024, get a cert)
 
+## NetBox Notes
+- For cloud assembly builds to work, vRA requires that you have a lookup domain condfigured in the IP Range.
+    - This can done via a custom field in NetBox and editing the `network_range` dictionary in `/src/main/python/get_ip_ranges/source.py`
+    - An easier solution for now is add a non-required field to the `/src/main/resources/endpoint-schema.json` file and editing the `get_ip_ranges` module.
+    - Doc coming soon on this.
+
 ## License
 
 [Apache License, 2.0](https://www.apache.org/licenses/LICENSE-2.0)
@@ -72,5 +78,6 @@ Building the package for the first time should include the `-PcollectDependencie
 ## To Do
 
 - Docs
+- Implement
 - Reduce Integration Validation requirements
 - Dynamic tagging/site inputs

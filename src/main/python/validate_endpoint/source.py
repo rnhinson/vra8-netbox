@@ -36,7 +36,7 @@ def do_validate_endpoint(self, auth_credentials, cert):
     token = auth_credentials["privateKey"]
 
     try:
-        response = requests.get(f"{netbox_url}}/api", verify=verify, headers={"Authorization": f"Token {token}"})
+        response = requests.get(f"{netbox_url}/api", verify=verify, headers={"Authorization": f"Token {token}"})
 
         if response.status_code == 200:
             return {

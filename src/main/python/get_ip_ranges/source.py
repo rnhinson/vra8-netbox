@@ -46,7 +46,7 @@ def do_get_ip_ranges(self, auth_credentials, cert):
 
     logging.info("Collecting ranges")
 
-    response = requests.get(f"{str(netbox_url)}/api/ipam/{str(netbox_object)}/?tag={str(netbox_tag)}&?site={str(netbox_site)}", verify=verify, headers={"Authorization": f"Token {token}"})
+    response = requests.get(f"{str(netbox_url)}/api/ipam/{str(netbox_object)}/?site={str(netbox_site)}&?tag={str(netbox_tag)}&?", verify=verify, headers={"Authorization": f"Token {token}"})
     r = response.json()["results"]
     result_ranges = []
 

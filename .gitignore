@@ -1,5 +1,8 @@
 /target/
 /.vscode/
+/src/main/python/validate_endpoint/.libs_cffi_backend
+/src/main/python/validate_endpoint/.libs_cffi_backend/*libffi
+
 
 __pycache__/
 *.py[cod]
